@@ -15,12 +15,10 @@
 This product provides support for external methods, which allow
 domain-specific customization of web environments.
 """
-__version__='$Revision: 1.52 $'[11:-2]
 
 import os
 import stat
 import sys
-import traceback
 
 from AccessControl.class_init import InitializeClass
 from AccessControl.Permissions import change_external_methods
@@ -29,20 +27,18 @@ from AccessControl.Permissions import view as View
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from Acquisition import Acquired
 from Acquisition import Explicit
-from App.Dialogs import MessageDialog
 from App.Extensions import getObject
 from App.Extensions import getPath
 from App.Extensions import FuncCode
 from App.special_dtml import DTMLFile
-from App.special_dtml import HTML
 from OFS.role import RoleManager
 from OFS.SimpleItem import Item
-from OFS.SimpleItem import pretty_tb
 from Persistence import Persistent
 from App.Management import Navigation
 from ComputedAttribute import ComputedAttribute
 
 manage_addExternalMethodForm=DTMLFile('dtml/methodAdd', globals())
+
 
 def manage_addExternalMethod(self, id, title, module, function, REQUEST=None):
     """Add an external method to a folder
@@ -64,22 +60,23 @@ def manage_addExternalMethod(self, id, title, module, function, REQUEST=None):
         However, the file name may have a prefix of
         'product.', indicating that it should be found in a product
         directory.
-        
+
         For example, if the module is: 'ACMEWidgets.foo', then an
         attempt will first be made to use the file
         'lib/python/Products/ACMEWidgets/Extensions/foo.py'. If this
         failes, then the file 'Extensions/ACMEWidgets.foo.py' will be
         used.
     """
-    id=str(id)
-    title=str(title)
-    module=str(module)
-    function=str(function)
+    id = str(id)
+    title = str(title)
+    module = str(module)
+    function = str(function)
 
-    i=ExternalMethod(id,title,module,function)
-    self._setObject(id,i)
+    i = ExternalMethod(id, title, module, function)
+    self._setObject(id, i)
     if REQUEST is not None:
-        return self.manage_main(self,REQUEST)
+        return self.manage_main(self, REQUEST)
+
 
 class ExternalMethod(Item, Persistent, Explicit,
                      RoleManager, Navigation):
@@ -108,17 +105,16 @@ class ExternalMethod(Item, Persistent, Explicit,
     func_defaults = ComputedAttribute(lambda self: self.getFuncDefaults())
     func_code = ComputedAttribute(lambda self: self.getFuncCode())
 
-
     ZopeTime = Acquired
     HelpSys = Acquired
     manage_page_header = Acquired
 
     manage_options=(
         (
-        {'label':'Properties', 'action':'manage_main',
-         'help':('ExternalMethod','External-Method_Properties.stx')},
-        {'label':'Test', 'action':'',
-         'help':('ExternalMethod','External-Method_Try-It.stx')},
+        {'label': 'Properties', 'action': 'manage_main',
+         'help': ('ExternalMethod', 'External-Method_Properties.stx')},
+        {'label': 'Test', 'action': '',
+         'help': ('ExternalMethod', 'External-Method_Try-It.stx')},
         )
         + Item.manage_options
         + RoleManager.manage_options
@@ -155,18 +151,18 @@ class ExternalMethod(Item, Persistent, Explicit,
         self.getFunction(1)
         if REQUEST:
             message="External Method Uploaded."
-            return self.manage_main(self,REQUEST,manage_tabs_message=message)
+            return self.manage_main(self, REQUEST, manage_tabs_message=message)
 
     def getFunction(self, reload=0):
+        f = getObject(self._module, self._function, reload)
+        if hasattr(f, 'im_func'):
+            ff = f.im_func
+        else:
+            ff = f
 
-        f=getObject(self._module, self._function, reload)
-        if hasattr(f,'im_func'): ff=f.im_func
-        else: ff=f
-
-        self._v_func_defaults  = ff.func_defaults
-        self._v_func_code = FuncCode(ff,f is not ff)
-
-        self._v_f=f
+        self._v_func_defaults = ff.func_defaults
+        self._v_func_code = FuncCode(ff, f is not ff)
+        self._v_f = f
 
         return f
 
@@ -217,28 +213,27 @@ class ExternalMethod(Item, Persistent, Explicit,
 
         filePath = self.filepath()
         if filePath==None:
-            raise RuntimeError,\
-                "external method could not be called " \
-                "because it is None"
+            raise RuntimeError("external method could not be called "
+                               "because it is None")
 
         if not os.path.exists(filePath):
-            raise RuntimeError,\
-                "external method could not be called " \
-                "because the file does not exist"
+            raise RuntimeError("external method could not be called "
+                               "because the file does not exist")
 
         if Globals.DevelopmentMode:
             self.reloadIfChanged()
 
         if hasattr(self, '_v_f'):
-            f=self._v_f
+            f = self._v_f
         else:
-            f=self.getFunction()
+            f = self.getFunction()
 
         __traceback_info__=args, kw, self._v_func_defaults
 
-        try: return f(*args, **kw)
+        try:
+            return f(*args, **kw)
         except TypeError, v:
-            tb=sys.exc_info()[2]
+            tb = sys.exc_info()[2]
             try:
                 if ((self._v_func_code.co_argcount-
                      len(self._v_func_defaults or ()) - 1 == len(args))
@@ -246,16 +241,19 @@ class ExternalMethod(Item, Persistent, Explicit,
                     return f(self.aq_parent.this(), *args, **kw)
 
                 raise TypeError, v, tb
-            finally: tb=None
+            finally:
+                tb = None
 
+    def function(self):
+        return self._function
 
-    def function(self): return self._function
-    def module(self): return self._module
+    def module(self):
+        return self._module
 
     def filepath(self):
         if not hasattr(self, '_v_filepath'):
             self._v_filepath=getPath('Extensions', self._module,
-                                     suffixes=('','py','pyc','pyp'))
+                                     suffixes=('', 'py', 'pyc', 'pyp'))
         return self._v_filepath
 
 InitializeClass(ExternalMethod)

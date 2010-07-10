@@ -10,16 +10,11 @@
 # FOR A PARTICULAR PURPOSE
 #
 ##############################################################################
-__doc__='''External Method Product Initialization
-$Id$'''
-__version__='$Revision: 1.15 $'[11:-2]
 
 import ExternalMethod
 
-# This is the new way to initialize products.  It is hoped
-# that this more direct mechanism will be more understandable.
-def initialize(context):
 
+def initialize(context):
     context.registerClass(
         ExternalMethod.ExternalMethod,
         constructors=(ExternalMethod.manage_addExternalMethodForm,

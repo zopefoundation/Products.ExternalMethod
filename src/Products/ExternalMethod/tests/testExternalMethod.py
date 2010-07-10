@@ -11,20 +11,29 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""
-
-Revision information:
-$Id$
-"""
 
 import math
 import os
+import sys
 import unittest
 
 import ZODB # dead goat
 import Products.ExternalMethod.tests
 from Products.ExternalMethod.ExternalMethod import ExternalMethod
 import App.config
+
+
+def package_home(globals_dict):
+    __name__ = globals_dict['__name__']
+    m = sys.modules[__name__]
+    if hasattr(m, '__path__'):
+        r = m.__path__[0]
+    elif "." in __name__:
+        r = sys.modules[__name__.split('.', 1)[0]].__path__[0]
+    else:
+        r = __name__
+    return os.path.abspath(r)
+
 
 class TestExternalMethod(unittest.TestCase):
 
@@ -45,7 +54,7 @@ class TestExternalMethod(unittest.TestCase):
         em2 = ExternalMethod.__basicnew__()
         em2.__setstate__(state)
         self.assertEqual(em2(9), math.sqrt(9))
-        self.failIf(state.has_key('func_defaults'))
+        self.failIf('func_defaults' in state)
 
     def test_mapply(self):
         from ZPublisher.mapply import mapply
@@ -58,22 +67,5 @@ class TestExternalMethod(unittest.TestCase):
         self.assertEqual(mapply(em1, (), {'arg1': 9}), math.sqrt(9))
 
 
-
 def test_suite():
     return unittest.makeSuite(TestExternalMethod)
-
-
-def package_home(globals_dict):
-    __name__=globals_dict['__name__']
-    m=sys.modules[__name__]
-    if hasattr(m,'__path__'):
-        r=m.__path__[0]
-    elif "." in __name__:
-        r=sys.modules[__name__.split('.',1)[0]].__path__[0]
-    else:
-        r=__name__
-    return os.path.abspath(r)
-
-
-if __name__=='__main__':
-    unittest.main(defaultTest='test_suite')
