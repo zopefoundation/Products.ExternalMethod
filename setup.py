@@ -29,6 +29,11 @@ setup(name='Products.ExternalMethod',
       package_dir={'': 'src'},
       install_requires=[
         'setuptools',
+        'AccessControl',
+        'Acquisition',
+        'ExtensionClass',
+        'Persistence',
+        'ZODB3',
         'Zope2 >= 2.13.0a1'
       ],
       include_package_data=True,
