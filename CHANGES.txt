@@ -4,6 +4,7 @@ Changelog
 2.13.1 (unreleased)
 -------------------
 
+- Handle both `func_code` / `__code__` and `func_defaults` / `__defaults__`.
 
 2.13.0 (2010-07-10)
 -------------------

@@ -102,8 +102,11 @@ class ExternalMethod(Item, Persistent, Explicit,
     security = ClassSecurityInfo()
     security.declareObjectProtected(View)
 
-    func_defaults = ComputedAttribute(lambda self: self.getFuncDefaults())
-    func_code = ComputedAttribute(lambda self: self.getFuncCode())
+    func_defaults = __defaults__ = ComputedAttribute(
+        lambda self: self.getFuncDefaults())
+
+    func_code = __code__ = ComputedAttribute(
+        lambda self: self.getFuncCode())
 
     ZopeTime = Acquired
     HelpSys = Acquired
