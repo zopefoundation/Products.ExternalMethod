@@ -31,7 +31,7 @@ setup(name='Products.ExternalMethod',
         'setuptools',
         'AccessControl',
         'Acquisition',
-        'ExtensionClass',
+        'ExtensionClass>=4.1a1',
         'Persistence',
         'ZODB3',
         'Zope2 >= 2.13.0a1'
