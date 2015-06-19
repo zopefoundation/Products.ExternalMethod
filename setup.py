@@ -15,7 +15,7 @@
 from setuptools import setup, find_packages
 
 setup(name='Products.ExternalMethod',
-      version = '2.13.2',
+      version = '2.14.dev0',
       url='http://pypi.python.org/pypi/Products.ExternalMethod',
       license='ZPL 2.1',
       description="This package provides support for external Python methods "
