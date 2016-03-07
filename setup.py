@@ -33,7 +33,7 @@ setup(name='Products.ExternalMethod',
         'Acquisition',
         'ExtensionClass>=4.1a1',
         'Persistence',
-        'ZODB3',
+        'ZODB',
         'Zope2 >= 2.13.0a1'
       ],
       include_package_data=True,
