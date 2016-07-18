@@ -17,10 +17,10 @@ import os
 import sys
 import unittest
 
-import ZODB # dead goat
+import App.config
+
 import Products.ExternalMethod.tests
 from Products.ExternalMethod.ExternalMethod import ExternalMethod
-import App.config
 
 
 def package_home(globals_dict):
@@ -65,7 +65,3 @@ class TestExternalMethod(unittest.TestCase):
         em2 = ExternalMethod.__basicnew__()
         em2.__setstate__(state)
         self.assertEqual(mapply(em1, (), {'arg1': 9}), math.sqrt(9))
-
-
-def test_suite():
-    return unittest.makeSuite(TestExternalMethod)

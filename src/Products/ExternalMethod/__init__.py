@@ -18,6 +18,6 @@ def initialize(context):
     context.registerClass(
         ExternalMethod.ExternalMethod,
         constructors=(ExternalMethod.manage_addExternalMethodForm,
-                       ExternalMethod.manage_addExternalMethod),
+                      ExternalMethod.manage_addExternalMethod),
         icon='extmethod.gif',
-        )
+    )

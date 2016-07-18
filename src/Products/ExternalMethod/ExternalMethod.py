@@ -117,11 +117,11 @@ class ExternalMethod(Item, Persistent, Explicit,
     ) + Item.manage_options + RoleManager.manage_options)
 
     def __init__(self, id, title, module, function):
-        self.id=id
+        self.id = id
         self.manage_edit(title, module, function)
 
     security.declareProtected(view_management_screens, 'manage_main')
-    manage_main=DTMLFile('dtml/methodEdit', globals())
+    manage_main = DTMLFile('dtml/methodEdit', globals())
 
     security.declareProtected(change_external_methods, 'manage_edit')
     def manage_edit(self, title, module, function, REQUEST=None):
@@ -135,18 +135,20 @@ class ExternalMethod(Item, Persistent, Explicit,
         the effects of changes, but can lead to problems of functions
         rely on shared global data.
         """
-        title=str(title)
-        module=str(module)
-        function=str(function)
+        title = str(title)
+        module = str(module)
+        function = str(function)
 
-        self.title=title
-        if module[-3:]=='.py': module=module[:-3]
-        elif module[-4:]=='.pyc': module=module[:-4]
-        self._module=module
-        self._function=function
+        self.title = title
+        if module[-3:] == '.py':
+            module = module[:-3]
+        elif module[-4:] == '.pyc':
+            module = module[:-4]
+        self._module = module
+        self._function = function
         self.getFunction(1)
         if REQUEST:
-            message="External Method Uploaded."
+            message = "External Method Uploaded."
             return self.manage_main(self, REQUEST, manage_tabs_message=message)
 
     def getFunction(self, reload=0):
@@ -164,11 +166,10 @@ class ExternalMethod(Item, Persistent, Explicit,
 
     def reloadIfChanged(self):
         # If the file has been modified since last loaded, force a reload.
-        ts=os.stat(self.filepath())[stat.ST_MTIME]
-        if (not hasattr(self, '_v_last_read') or
-            (ts != self._v_last_read)):
-            self._v_f=self.getFunction(1)
-            self._v_last_read=ts
+        ts = os.stat(self.filepath())[stat.ST_MTIME]
+        if (not hasattr(self, '_v_last_read') or (ts != self._v_last_read)):
+            self._v_f = self.getFunction(1)
+            self._v_last_read = ts
 
     def getFuncDefaults(self):
         import Globals  # for data
@@ -208,7 +209,7 @@ class ExternalMethod(Item, Persistent, Explicit,
         import Globals  # for data
 
         filePath = self.filepath()
-        if filePath==None:
+        if filePath is None:
             raise RuntimeError("external method could not be called "
                                "because it is None")
 
@@ -224,21 +225,21 @@ class ExternalMethod(Item, Persistent, Explicit,
         else:
             f = self.getFunction()
 
-        __traceback_info__=args, kw, self._v_func_defaults
+        __traceback_info__ = args, kw, self._v_func_defaults
 
         try:
             return f(*args, **kw)
-        except TypeError, v:
+        except TypeError as v:
             tb = sys.exc_info()[2]
             try:
-                if ((self._v_func_code.co_argcount-
-                     len(self._v_func_defaults or ()) - 1 == len(args))
-                    and self._v_func_code.co_varnames[0]=='self'):
+                if ((self._v_func_code.co_argcount -
+                     len(self._v_func_defaults or ()) - 1 == len(args)) and
+                        self._v_func_code.co_varnames[0] == 'self'):
                     return f(self.aq_parent.this(), *args, **kw)
 
-                raise TypeError, v, tb
+                raise TypeError(v)
             finally:
-                tb = None
+                tb = None  # NOQA
 
     def function(self):
         return self._function
@@ -248,8 +249,8 @@ class ExternalMethod(Item, Persistent, Explicit,
 
     def filepath(self):
         if not hasattr(self, '_v_filepath'):
-            self._v_filepath=getPath('Extensions', self._module,
-                                     suffixes=('', 'py', 'pyc', 'pyp'))
+            self._v_filepath = getPath('Extensions', self._module,
+                                       suffixes=('', 'py', 'pyc', 'pyp'))
         return self._v_filepath
 
 InitializeClass(ExternalMethod)
