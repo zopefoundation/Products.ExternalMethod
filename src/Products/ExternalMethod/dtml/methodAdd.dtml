@@ -1,9 +1,7 @@
 <dtml-var manage_page_header>
 
 <dtml-var "manage_form_title(this(), _,
-           form_title='Add External Method',
-           help_product='ExternalMethod',
-           help_topic='External-Method_Add.stx'
+           form_title='Add External Method'
 	   )">
 
 <p class="form-help">

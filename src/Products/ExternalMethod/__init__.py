@@ -21,6 +21,3 @@ def initialize(context):
                        ExternalMethod.manage_addExternalMethod),
         icon='extmethod.gif',
         )
-
-    context.registerHelp()
-    context.registerHelpTitle('Zope Help')

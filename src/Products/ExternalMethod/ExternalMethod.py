@@ -37,7 +37,7 @@ from Persistence import Persistent
 from App.Management import Navigation
 from ComputedAttribute import ComputedAttribute
 
-manage_addExternalMethodForm=DTMLFile('dtml/methodAdd', globals())
+manage_addExternalMethodForm = DTMLFile('dtml/methodAdd', globals())
 
 
 def manage_addExternalMethod(self, id, title, module, function, REQUEST=None):
@@ -109,19 +109,12 @@ class ExternalMethod(Item, Persistent, Explicit,
         lambda self: self.getFuncCode())
 
     ZopeTime = Acquired
-    HelpSys = Acquired
     manage_page_header = Acquired
 
-    manage_options=(
-        (
-        {'label': 'Properties', 'action': 'manage_main',
-         'help': ('ExternalMethod', 'External-Method_Properties.stx')},
-        {'label': 'Test', 'action': '',
-         'help': ('ExternalMethod', 'External-Method_Try-It.stx')},
-        )
-        + Item.manage_options
-        + RoleManager.manage_options
-        )
+    manage_options = ((
+        {'label': 'Properties', 'action': 'manage_main'},
+        {'label': 'Test', 'action': ''},
+    ) + Item.manage_options + RoleManager.manage_options)
 
     def __init__(self, id, title, module, function):
         self.id=id
