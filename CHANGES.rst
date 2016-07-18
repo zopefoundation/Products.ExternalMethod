@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.14.0 (unreleased)
--------------------
+3.0 (unreleased)
+----------------
 
 - Remove ZODB3 as direct dependency. Now we are able to use ZODB 4.0
   and it is a dependency of Zope2 anyways
