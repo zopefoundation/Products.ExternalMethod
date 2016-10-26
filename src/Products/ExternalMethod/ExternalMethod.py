@@ -23,10 +23,11 @@ import sys
 from AccessControl.class_init import InitializeClass
 from AccessControl.Permissions import change_external_methods
 from AccessControl.Permissions import view_management_screens
-from AccessControl.Permissions import view as View
+from AccessControl.Permissions import view as View  # NOQA
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from Acquisition import Acquired
 from Acquisition import Explicit
+from App.config import getConfiguration
 from App.Extensions import getObject
 from App.Extensions import getPath
 from App.Extensions import FuncCode
@@ -172,16 +173,14 @@ class ExternalMethod(Item, Persistent, Explicit,
             self._v_last_read = ts
 
     def getFuncDefaults(self):
-        import Globals  # for data
-        if Globals.DevelopmentMode:
+        if getConfiguration().debug_mode:
             self.reloadIfChanged()
         if not hasattr(self, '_v_func_defaults'):
             self._v_f = self.getFunction()
         return self._v_func_defaults
 
     def getFuncCode(self):
-        import Globals  # for data
-        if Globals.DevelopmentMode:
+        if getConfiguration().debug_mode:
             self.reloadIfChanged()
         if not hasattr(self, '_v_func_code'):
             self._v_f = self.getFunction()
@@ -206,8 +205,6 @@ class ExternalMethod(Item, Persistent, Explicit,
         In this case, the URL parent of the object is supplied as the
         first argument.
         """
-        import Globals  # for data
-
         filePath = self.filepath()
         if filePath is None:
             raise RuntimeError("external method could not be called "
@@ -217,7 +214,7 @@ class ExternalMethod(Item, Persistent, Explicit,
             raise RuntimeError("external method could not be called "
                                "because the file does not exist")
 
-        if Globals.DevelopmentMode:
+        if getConfiguration().debug_mode:
             self.reloadIfChanged()
 
         if hasattr(self, '_v_f'):

@@ -15,7 +15,7 @@
 from setuptools import setup, find_packages
 
 setup(name='Products.ExternalMethod',
-      version='3.0.1.dev0',
+      version='4.0.dev0',
       url='http://pypi.python.org/pypi/Products.ExternalMethod',
       license='ZPL 2.1',
       description="This package provides support for external Python methods "
@@ -45,7 +45,7 @@ setup(name='Products.ExternalMethod',
           'ExtensionClass>=4.1a1',
           'Persistence',
           'ZODB',
-          'Zope2 >= 2.13.0a1'
+          'Zope2 >= 4.0a1'
       ],
       include_package_data=True,
       zip_safe=False,
