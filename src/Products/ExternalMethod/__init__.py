@@ -11,7 +11,7 @@
 #
 ##############################################################################
 
-import ExternalMethod
+from Products.ExternalMethod import ExternalMethod
 
 
 def initialize(context):

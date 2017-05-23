@@ -19,7 +19,6 @@ import unittest
 
 import App.config
 
-import Products.ExternalMethod.tests
 from Products.ExternalMethod.ExternalMethod import ExternalMethod
 
 
@@ -38,10 +37,10 @@ def package_home(globals_dict):
 class TestExternalMethod(unittest.TestCase):
 
     def setUp(self):
+        test_dir, _ = os.path.split(__file__)
         self._old = App.config.getConfiguration()
         cfg = App.config.DefaultConfiguration()
-        cfg.instancehome = os.path.dirname(
-            Products.ExternalMethod.tests.__file__)
+        cfg.instancehome = test_dir
         App.config.setConfiguration(cfg)
 
     def tearDown(self):
