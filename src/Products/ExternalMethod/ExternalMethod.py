@@ -103,11 +103,9 @@ class ExternalMethod(Item, Persistent, Explicit,
     security = ClassSecurityInfo()
     security.declareObjectProtected(View)
 
-    func_defaults = __defaults__ = ComputedAttribute(
-        lambda self: self.getFuncDefaults())
+    __defaults__ = ComputedAttribute(lambda self: self.getFuncDefaults())
 
-    func_code = __code__ = ComputedAttribute(
-        lambda self: self.getFuncCode())
+    __code__ = ComputedAttribute(lambda self: self.getFuncCode())
 
     ZopeTime = Acquired
     manage_page_header = Acquired
@@ -147,19 +145,19 @@ class ExternalMethod(Item, Persistent, Explicit,
             module = module[:-4]
         self._module = module
         self._function = function
-        self.getFunction(1)
+        self.getFunction(True)
         if REQUEST:
             message = "External Method Uploaded."
             return self.manage_main(self, REQUEST, manage_tabs_message=message)
 
-    def getFunction(self, reload=0):
+    def getFunction(self, reload=False):
         f = getObject(self._module, self._function, reload)
-        if hasattr(f, 'im_func'):
-            ff = f.im_func
+        if hasattr(f, '__func__'):
+            ff = f.__func__
         else:
             ff = f
 
-        self._v_func_defaults = ff.func_defaults
+        self._v_func_defaults = ff.__defaults__
         self._v_func_code = FuncCode(ff, f is not ff)
         self._v_f = f
 
@@ -169,7 +167,7 @@ class ExternalMethod(Item, Persistent, Explicit,
         # If the file has been modified since last loaded, force a reload.
         ts = os.stat(self.filepath())[stat.ST_MTIME]
         if (not hasattr(self, '_v_last_read') or (ts != self._v_last_read)):
-            self._v_f = self.getFunction(1)
+            self._v_f = self.getFunction(True)
             self._v_last_read = ts
 
     def getFuncDefaults(self):
@@ -249,5 +247,6 @@ class ExternalMethod(Item, Persistent, Explicit,
             self._v_filepath = getPath('Extensions', self._module,
                                        suffixes=('', 'py', 'pyc', 'pyp'))
         return self._v_filepath
+
 
 InitializeClass(ExternalMethod)
