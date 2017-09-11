@@ -14,24 +14,11 @@
 
 import math
 import os
-import sys
 import unittest
 
 import App.config
 
 from Products.ExternalMethod.ExternalMethod import ExternalMethod
-
-
-def package_home(globals_dict):
-    __name__ = globals_dict['__name__']
-    m = sys.modules[__name__]
-    if hasattr(m, '__path__'):
-        r = m.__path__[0]
-    elif "." in __name__:
-        r = sys.modules[__name__.split('.', 1)[0]].__path__[0]
-    else:
-        r = __name__
-    return os.path.abspath(r)
 
 
 class TestExternalMethod(unittest.TestCase):
@@ -53,7 +40,7 @@ class TestExternalMethod(unittest.TestCase):
         em2 = ExternalMethod.__basicnew__()
         em2.__setstate__(state)
         self.assertEqual(em2(9), math.sqrt(9))
-        self.failIf('func_defaults' in state)
+        self.failIf('__defaults__' in state)
 
     def test_mapply(self):
         from ZPublisher.mapply import mapply

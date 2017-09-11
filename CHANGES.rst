@@ -4,6 +4,8 @@ Changelog
 4.0 (unreleased)
 ----------------
 
+- Add support for Python 3.4, 3.5 and 3.6.
+
 - Add compatibility with Zope 4.
 
 3.0 (2016-07-18)
