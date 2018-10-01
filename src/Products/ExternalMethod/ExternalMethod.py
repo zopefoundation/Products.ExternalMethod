@@ -99,6 +99,7 @@ class ExternalMethod(Item, Persistent, Explicit,
     """
 
     meta_type = 'External Method'
+    zmi_icon = 'fa fa-external-link-square-alt'
 
     security = ClassSecurityInfo()
     security.declareObjectProtected(View)
