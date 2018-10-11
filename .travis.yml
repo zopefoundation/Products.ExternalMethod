@@ -10,7 +10,7 @@ matrix:
           dist: xenial
           sudo: true
 install:
-    - pip install zc.buildout
+    - pip install zc.buildout coverage coveralls
     - buildout bootstrap
     - buildout
 script:
