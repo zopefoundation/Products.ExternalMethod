@@ -1,5 +1,5 @@
 [run]
-source = Products.ExternalEditor
+source = Products.ExternalMethod
 
 [report]
 precision = 2
