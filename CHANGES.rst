@@ -4,7 +4,7 @@ Changelog
 4.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Update to Bootstrap ZMI.
 
 
 4.0 (2017-10-18)
