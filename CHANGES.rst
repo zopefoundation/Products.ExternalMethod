@@ -4,8 +4,11 @@ Changelog
 4.1 (unreleased)
 ----------------
 
-- Update to Bootstrap ZMI.
+- Update to Bootstrap ZMI requiring `Zope >= 4.0b6`.
 
+- Add support for Python 3.7.
+
+- Drop support for Python 3.4.
 
 4.0 (2017-10-18)
 ----------------
