@@ -40,7 +40,7 @@ class TestExternalMethod(unittest.TestCase):
         em2 = ExternalMethod.__basicnew__()
         em2.__setstate__(state)
         self.assertEqual(em2(9), math.sqrt(9))
-        self.failIf('__defaults__' in state)
+        self.assertNotIn('__defaults__', state)
 
     def test_mapply(self):
         from ZPublisher.mapply import mapply
