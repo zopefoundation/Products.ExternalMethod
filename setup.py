@@ -16,7 +16,7 @@ from setuptools import setup, find_packages
 
 setup(name='Products.ExternalMethod',
       version='4.1.dev0',
-      url='https://pypi.org/project/Products.ExternalMethod',
+      url='https://github.com/zopefoundation/Products.ExternalMethod',
       license='ZPL 2.1',
       description="This package provides support for external Python methods "
                   "within a Zope environment.",
