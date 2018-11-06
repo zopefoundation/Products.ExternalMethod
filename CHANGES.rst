@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.1 (unreleased)
+4.1 (2018-11-06)
 ----------------
 
 - Update to Bootstrap ZMI requiring `Zope >= 4.0b6`.
