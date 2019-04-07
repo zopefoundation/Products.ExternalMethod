@@ -21,22 +21,23 @@ import stat
 import sys
 
 from AccessControl.class_init import InitializeClass
-from AccessControl.Permissions import change_external_methods
+from AccessControl.Permissions import change_external_methods  # NOQA
+from AccessControl.Permissions import view
 from AccessControl.Permissions import view_management_screens
-from AccessControl.Permissions import view as View  # NOQA
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from Acquisition import Acquired
 from Acquisition import Explicit
 from App.config import getConfiguration
+from App.Extensions import FuncCode
 from App.Extensions import getObject
 from App.Extensions import getPath
-from App.Extensions import FuncCode
+from App.Management import Navigation
 from App.special_dtml import DTMLFile
+from ComputedAttribute import ComputedAttribute
 from OFS.role import RoleManager
 from OFS.SimpleItem import Item
 from Persistence import Persistent
-from App.Management import Navigation
-from ComputedAttribute import ComputedAttribute
+
 
 manage_addExternalMethodForm = DTMLFile('dtml/methodAdd', globals())
 
@@ -102,7 +103,7 @@ class ExternalMethod(Item, Persistent, Explicit,
     zmi_icon = 'fa fa-external-link-square-alt'
 
     security = ClassSecurityInfo()
-    security.declareObjectProtected(View)
+    security.declareObjectProtected(view)
 
     __defaults__ = ComputedAttribute(lambda self: self.getFuncDefaults())
 
@@ -120,10 +121,11 @@ class ExternalMethod(Item, Persistent, Explicit,
         self.id = id
         self.manage_edit(title, module, function)
 
-    security.declareProtected(view_management_screens, 'manage_main')
+    security.declareProtected(view_management_screens,  # NOQA: flake8: D001
+                              'manage_main')
     manage_main = DTMLFile('dtml/methodEdit', globals())
 
-    security.declareProtected(change_external_methods, 'manage_edit')
+    @security.protected(change_external_methods)
     def manage_edit(self, title, module, function, REQUEST=None):
         """Change the external method
 
@@ -148,7 +150,7 @@ class ExternalMethod(Item, Persistent, Explicit,
         self._function = function
         self.getFunction(True)
         if REQUEST:
-            message = "External Method Uploaded."
+            message = 'External Method Uploaded.'
             return self.manage_main(self, REQUEST, manage_tabs_message=message)
 
     def getFunction(self, reload=False):
@@ -185,7 +187,7 @@ class ExternalMethod(Item, Persistent, Explicit,
             self._v_f = self.getFunction()
         return self._v_func_code
 
-    security.declareProtected(View, '__call__')
+    @security.protected(view)
     def __call__(self, *args, **kw):
         """Call an ExternalMethod
 
@@ -206,12 +208,12 @@ class ExternalMethod(Item, Persistent, Explicit,
         """
         filePath = self.filepath()
         if filePath is None:
-            raise RuntimeError("external method could not be called "
-                               "because it is None")
+            raise RuntimeError('external method could not be called '
+                               'because it is None')
 
         if not os.path.exists(filePath):
-            raise RuntimeError("external method could not be called "
-                               "because the file does not exist")
+            raise RuntimeError('external method could not be called '
+                               'because the file does not exist')
 
         if getConfiguration().debug_mode:
             self.reloadIfChanged()

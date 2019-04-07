@@ -4,6 +4,7 @@ dist
 lib
 parts
 
+.coverage
 *.dll
 *.pyc
 *.pyo

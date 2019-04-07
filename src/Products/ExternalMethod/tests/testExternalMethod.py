@@ -17,7 +17,6 @@ import os
 import unittest
 
 import App.config
-
 from Products.ExternalMethod.ExternalMethod import ExternalMethod
 
 

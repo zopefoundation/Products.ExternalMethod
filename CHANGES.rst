@@ -4,7 +4,9 @@ Changelog
 4.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Packaging cleanup
+
+- Linting and code coverage configuration for ``tox``
 
 
 4.1 (2018-11-06)

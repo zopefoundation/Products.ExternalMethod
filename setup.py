@@ -12,14 +12,21 @@
 #
 ##############################################################################
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
+
 
 setup(name='Products.ExternalMethod',
       version='4.2.dev0',
       url='https://github.com/zopefoundation/Products.ExternalMethod',
+      project_urls={
+        'Issue Tracker': ('https://github.com/zopefoundation/'
+                          '/Products.ExternalMethod/issues'),
+        'Sources': 'https://github.com/zopefoundation/Products.ExternalMethod',
+      },
       license='ZPL 2.1',
-      description="This package provides support for external Python methods "
-                  "within a Zope environment.",
+      description='This package provides support for external Python methods '
+                  'within a Zope environment.',
       author='Zope Foundation and Contributors',
       author_email='zope-dev@zope.org',
       long_description=(open('README.rst').read() + '\n' +
@@ -28,20 +35,23 @@ setup(name='Products.ExternalMethod',
       namespace_packages=['Products'],
       package_dir={'': 'src'},
       classifiers=[
-          "Development Status :: 6 - Mature",
-          "Environment :: Web Environment",
-          "Framework :: Zope :: 4",
-          "License :: OSI Approved :: Zope Public License",
-          "Operating System :: OS Independent",
-          "Programming Language :: Python",
-          "Programming Language :: Python :: 2",
-          "Programming Language :: Python :: 2.7",
-          "Programming Language :: Python :: 3",
-          "Programming Language :: Python :: 3.5",
-          "Programming Language :: Python :: 3.6",
-          "Programming Language :: Python :: 3.7",
-          "Programming Language :: Python :: Implementation :: CPython",
+          'Development Status :: 6 - Mature',
+          'Environment :: Web Environment',
+          'Framework :: Zope',
+          'Framework :: Zope :: 4',
+          'License :: OSI Approved :: Zope Public License',
+          'Operating System :: OS Independent',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 2',
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.5',
+          'Programming Language :: Python :: 3.6',
+          'Programming Language :: Python :: 3.7',
+          'Programming Language :: Python :: 3.8',
+          'Programming Language :: Python :: Implementation :: CPython',
       ],
+      python_requires='>=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*',
       install_requires=[
           'setuptools',
           'AccessControl',
@@ -49,7 +59,7 @@ setup(name='Products.ExternalMethod',
           'ExtensionClass>=4.1a1',
           'Persistence',
           'ZODB',
-          'Zope >= 4.0b6'
+          'Zope >= 4.0b6',
       ],
       include_package_data=True,
       zip_safe=False,
