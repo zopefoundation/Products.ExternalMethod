@@ -17,7 +17,7 @@ from setuptools import setup
 
 
 setup(name='Products.ExternalMethod',
-      version='4.2.dev0',
+      version='4.2',
       url='https://github.com/zopefoundation/Products.ExternalMethod',
       project_urls={
         'Issue Tracker': ('https://github.com/zopefoundation/'

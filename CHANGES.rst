@@ -1,7 +1,7 @@
 Change log
 ==========
 
-4.2 (unreleased)
+4.2 (2019-04-06)
 ----------------
 - Packaging cleanup
 
