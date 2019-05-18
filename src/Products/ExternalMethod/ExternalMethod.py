@@ -111,6 +111,7 @@ class ExternalMethod(Item, Persistent, Explicit,
 
     ZopeTime = Acquired
     manage_page_header = Acquired
+    getBookmarkableURLs = Acquired
 
     manage_options = ((
         {'label': 'Properties', 'action': 'manage_main'},
