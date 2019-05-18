@@ -3,6 +3,8 @@ Change log
 
 4.3 (unreleased)
 ----------------
+- Add support for the bookmarkable URLs ZMI feature
+  (`Zope#635 <https://github.com/zopefoundation/Zope/issues/635>`_)
 
 
 4.2 (2019-04-06)
