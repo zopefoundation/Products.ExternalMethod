@@ -10,6 +10,7 @@ parts
 *.pyo
 *.so
 .installed.cfg
+default.profraw
 develop-eggs/
 eggs/
 *.egg-info/
