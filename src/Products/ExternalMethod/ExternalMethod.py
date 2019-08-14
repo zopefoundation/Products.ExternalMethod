@@ -122,7 +122,7 @@ class ExternalMethod(Item, Persistent, Explicit,
         self.id = id
         self.manage_edit(title, module, function)
 
-    security.declareProtected(view_management_screens,  # NOQA: flake8: D001
+    security.declareProtected(view_management_screens,  # noqa: D001
                               'manage_main')
     manage_main = DTMLFile('dtml/methodEdit', globals())
 

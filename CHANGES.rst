@@ -3,6 +3,7 @@ Change log
 
 4.4 (unreleased)
 ----------------
+- Fix failing linter.
 
 
 4.3 (2019-05-18)
