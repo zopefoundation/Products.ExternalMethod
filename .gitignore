@@ -11,6 +11,7 @@ parts
 *.so
 .installed.cfg
 default.profraw
+pyvenv.cfg
 develop-eggs/
 eggs/
 *.egg-info/
