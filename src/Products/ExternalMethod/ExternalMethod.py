@@ -110,6 +110,7 @@ class ExternalMethod(Item, Persistent, Explicit,
     __code__ = ComputedAttribute(lambda self: self.getFuncCode())
 
     ZopeTime = Acquired
+    ZopeVersion = Acquired
     manage_page_header = Acquired
     getBookmarkableURLs = Acquired
 
