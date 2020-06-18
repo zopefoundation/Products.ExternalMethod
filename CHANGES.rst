@@ -1,7 +1,7 @@
 Change log
 ==========
 
-4.4 (unreleased)
+4.4 (2020-06-18)
 ----------------
 - Fix for Zope 4.4.3 ZMI by adding explicit acquisition of name ``ZopeVersion``
   (`#9 <https://github.com/zopefoundation/Products.ExternalMethod/issues/9>`_)
