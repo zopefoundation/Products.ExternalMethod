@@ -3,6 +3,7 @@ Change log
 
 4.5 (unreleased)
 ----------------
+- update configuration for version 5 of ``isort``
 
 
 4.4 (2020-06-18)
