@@ -5,6 +5,8 @@ Change log
 ----------------
 - update configuration for version 5 of ``isort``
 
+- add support for Python 3.9
+
 
 4.4 (2020-06-18)
 ----------------
