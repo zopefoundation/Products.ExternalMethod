@@ -1,7 +1,7 @@
 Change log
 ==========
 
-4.5 (unreleased)
+4.5 (2021-03-15)
 ----------------
 - update configuration for version 5 of ``isort``
 
