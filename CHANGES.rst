@@ -3,13 +3,13 @@ Change log
 
 4.6 (unreleased)
 ----------------
-
+- Add support for Python 3.10.
 
 4.5 (2021-03-15)
 ----------------
-- update configuration for version 5 of ``isort``
+- Update configuration for version 5 of ``isort``.
 
-- add support for Python 3.9
+- Add support for Python 3.9.
 
 
 4.4 (2020-06-18)
