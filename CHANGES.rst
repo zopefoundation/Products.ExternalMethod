@@ -4,10 +4,10 @@ Change log
 6.0 (unreleased)
 ----------------
 
-
-- Add support for Python 3.12.
+- Add support for Python 3.12 and 3.13.
 
 - Drop support for Python 3.7.
+
 
 5.0 (2023-02-01)
 ----------------
