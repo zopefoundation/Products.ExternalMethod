@@ -4,8 +4,12 @@ Change log
 6.1 (unreleased)
 ----------------
 
+- Switch to PEP 420 native namespace.
 
-- Drop support for Python 3.8.
+- Add support for Python 3.14.
+
+- Drop support for Python 3.8 and 3.9.
+
 
 6.0 (2024-09-16)
 ----------------
