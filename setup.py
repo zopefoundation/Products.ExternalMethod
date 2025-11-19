@@ -16,7 +16,7 @@ from setuptools import setup
 
 
 setup(name='Products.ExternalMethod',
-      version='6.1.dev0',
+      version='6.1',
       url='https://github.com/zopefoundation/Products.ExternalMethod',
       project_urls={
           'Issue Tracker': ('https://github.com/zopefoundation/'
@@ -57,4 +57,5 @@ setup(name='Products.ExternalMethod',
           'ZODB',
           'Zope >= 4.0b6',
       ],
+      include_package_data=True,
       )
