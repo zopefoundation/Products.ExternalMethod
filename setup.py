@@ -12,7 +12,6 @@
 #
 ##############################################################################
 
-from setuptools import find_packages
 from setuptools import setup
 
 
@@ -33,9 +32,6 @@ setup(name='Products.ExternalMethod',
       long_description=(open('README.rst').read() + '\n' +
                         open('CHANGES.rst').read()),
       long_description_content_type='text/x-rst',
-      packages=find_packages('src'),
-      namespace_packages=['Products'],
-      package_dir={'': 'src'},
       classifiers=[
           'Development Status :: 6 - Mature',
           'Environment :: Web Environment',
@@ -45,16 +41,15 @@ setup(name='Products.ExternalMethod',
           'Operating System :: OS Independent',
           'Programming Language :: Python',
           'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.9',
           'Programming Language :: Python :: 3.10',
           'Programming Language :: Python :: 3.11',
           'Programming Language :: Python :: 3.12',
           'Programming Language :: Python :: 3.13',
+          'Programming Language :: Python :: 3.14',
           'Programming Language :: Python :: Implementation :: CPython',
       ],
-      python_requires='>=3.9',
+      python_requires='>=3.10',
       install_requires=[
-          'setuptools',
           'AccessControl',
           'Acquisition',
           'ExtensionClass>=4.1a1',
@@ -62,6 +57,4 @@ setup(name='Products.ExternalMethod',
           'ZODB',
           'Zope >= 4.0b6',
       ],
-      include_package_data=True,
-      zip_safe=False,
       )
