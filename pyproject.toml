@@ -42,7 +42,7 @@ dependencies = [
     "ExtensionClass>=4.1a1",
     "Persistence",
     "ZODB",
-    "Zope >= 4.0b6",
+    "Zope >= 5",
 ]
 
 [project.urls]
